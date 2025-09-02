@@ -89,3 +89,19 @@ docker-compose up --build
 - The backend schedules a daily sync (default 3 AM UTC) using `CRON_SCHEDULE` env var.
 - You can force a one-time sync by running `npm run seed` in `backend/`.
 - Secrets/DB credentials should be managed via environment variables.
+
+## Continuous Integration (CI)
+
+This repository uses **GitHub Actions** for automated builds and tests.
+
+The pipeline is defined in `.github/workflows/ci.yml` and runs automatically on pushes and pull requests to `main`.
+
+### What it does:
+1. **Checks out the source code**
+2. **Builds Docker images using docker-compose**
+3. **Installs frontend and backend dependencies**
+4. **Runs build scripts for backend (Node.js) and frontend (React)**
+5. **Runs optional test suite**
+
+### Status Badge
+![CI](https://github.com/Oluwakomiyo/NYCAD-sndx/actions/workflows/ci.yml/badge.svg)
