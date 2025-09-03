@@ -30,48 +30,38 @@ jobs:
       # Step 1: Checkout source code
       - name: Checkout source code
         uses: actions/checkout@v3
-
-      # Step 2: Set up Docker Buildx
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
       
-      # Step 4: Build and start services
-      - name: Build and start containers
-        run: |
-          docker compose build
-          docker compose up -d
-
-      # Step 5: Install backend dependencies
+      # Step 4: Install backend dependencies
       - name: Install backend deps
         run: |
           cd backend
           npm install
 
-      # Step 6: Install frontend dependencies
+      # Step 5: Install frontend dependencies
       - name: Install frontend deps
         run: |
           cd frontend
           npm install
 
-      # Step 7: Run backend build
+      # Step 6: Run backend build
       - name: Build backend
         run: |
           cd backend
           npm run build
 
-      # Step 8: Run frontend build
+      # Step 7: Run frontend build
       - name: Build frontend
         run: |
           cd frontend
           npm run build
 
-      # Step 9: Run tests
+      # Step 8: Run tests
       - name: Run tests
         run: |
           cd backend
           npm test
 
-      # Step 10: Stop containers (cleanup)
+      # Step 9: Stop containers (cleanup)
       - name: Stop containers
         if: always()
         run: docker compose down
