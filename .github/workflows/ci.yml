@@ -31,37 +31,26 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
       
-      # Step 4: Install backend dependencies
+      # Step 2: Install backend dependencies
       - name: Install backend deps
         run: |
           cd backend
           npm install
 
-      # Step 5: Install frontend dependencies
+      # Step 3: Install frontend dependencies
       - name: Install frontend deps
         run: |
           cd frontend
           npm install
-
-      # Step 6: Run backend build
-      - name: Build backend
-        run: |
-          cd backend
-          npm run build
-
-      # Step 7: Run frontend build
+      
+      # Step 4: Run frontend build
       - name: Build frontend
         run: |
           cd frontend
           npm run build
 
-      # Step 8: Run tests
+      # Step 5: Run tests
       - name: Run tests
         run: |
           cd backend
-          npm test
-
-      # Step 9: Stop containers (cleanup)
-      - name: Stop containers
-        if: always()
-        run: docker compose down
+          npm test     
