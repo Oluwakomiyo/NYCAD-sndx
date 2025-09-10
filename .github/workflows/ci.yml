@@ -37,30 +37,36 @@ jobs:
           cd backend
           npm install
 
-      # Step 3: Install frontend dependencies
+      # Step 3: Run npm audit for dependency vulnerabilities
+      - name: Dependency vulnerability check (npm audit)
+        run: |
+          cd backend
+          npm audit --audit-level=high
+
+      # Step 4: Install frontend dependencies
       - name: Install frontend deps
         run: |
           cd frontend
           npm install
       
-      # Step 4: Run frontend build
+      # Step 5: Run frontend build
       - name: Build frontend
         run: |
           cd frontend
           npm run build
 
-      # Step 5: Run tests
+      # Step 6: Run tests
       - name: Run tests
         run: |
           cd backend
           npm test     
 
-      # Step 6: Build Docker image
+      # Step 7: Build Docker image
       - name: Build Docker image
         run: |
           docker build -t myapp:${{ github.sha }} ./backend
 
-      # Step 7: Run Trivy vulnerability scan
+      # Step 8: Run Trivy vulnerability scan
       - name: Trivy filesystem scan
         uses: aquasecurity/trivy-action@master
         with:
