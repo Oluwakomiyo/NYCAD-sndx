@@ -58,13 +58,13 @@ jobs:
       # Step 6: Build Docker image
       - name: Build Docker image
         run: |
-          docker build -t myapp:${{ github.sha }} .
+          docker build -t myapp:${{ github.sha }} ./backend
 
       # Step 7: Run Trivy vulnerability scan
       - name: Trivy image scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: myapp:${{ github.sha }}
+          image-ref: myapp:${{ github.sha }} ./backend
           format: 'table'
           exit-code: '1'          
           ignore-unfixed: true    
