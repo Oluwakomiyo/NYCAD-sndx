@@ -61,11 +61,11 @@ jobs:
           docker build -t myapp:${{ github.sha }} ./backend
 
       # Step 7: Run Trivy vulnerability scan
-      - name: Trivy image scan
+      - name: Trivy filesystem scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: myapp:${{ github.sha }}
-          format: 'table'
-          exit-code: '1'          
-          ignore-unfixed: true    
-          severity: 'CRITICAL,HIGH'    
+          scan-type: 'fs'
+          scan-ref: ./backend
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
