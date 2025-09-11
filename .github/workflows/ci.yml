@@ -61,12 +61,16 @@ jobs:
           cd backend
           npm test     
 
-      # Step 7: SonarQube Scan
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v2
+      # Step 7: SonarCloud Scan
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          projectBaseDir: .
         env:
-          SONAR_TOKEN: ${{ secrets.SONARSECRET }}
-          SONAR_HOST_URL: http://localhost:9000
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+          SONAR_ORGANIZATION: schinojr-org
+          SONAR_PROJECT_KEY: Oluwakomiyo_NYCAD-sndx
 
       # Step 8: Build Docker image
       - name: Build Docker image
