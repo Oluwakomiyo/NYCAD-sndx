@@ -66,11 +66,11 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           projectBaseDir: .
+          args: >
+            -Dsonar.organization=schinojr-org
+            -Dsonar.projectKey=Oluwakomiyo_NYCAD-sndx
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonarcloud.io
-          SONAR_ORGANIZATION: schinojr-org
-          SONAR_PROJECT_KEY: Oluwakomiyo_NYCAD-sndx
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
 
       # Step 8: Build Docker image
       - name: Build Docker image
