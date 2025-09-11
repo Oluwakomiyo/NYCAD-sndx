@@ -61,12 +61,19 @@ jobs:
           cd backend
           npm test     
 
-      # Step 7: Build Docker image
+      # Step 7: SonarQube Scan
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONARSECRET }}
+          SONAR_HOST_URL: http://localhost:9000
+
+      # Step 8: Build Docker image
       - name: Build Docker image
         run: |
           docker build -t myapp:${{ github.sha }} ./backend
 
-      # Step 8: Run Trivy vulnerability scan
+      # Step 9: Run Trivy vulnerability scan
       - name: Trivy filesystem scan
         uses: aquasecurity/trivy-action@master
         with:
