@@ -1,0 +1,13 @@
+# k8s/backend/backend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: nycad-app
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 4000
+      targetPort: 4000
+  type: ClusterIP

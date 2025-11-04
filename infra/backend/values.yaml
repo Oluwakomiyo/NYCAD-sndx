@@ -1,0 +1,34 @@
+replicaCount: 2
+
+image:
+  repository: schino15/nycad-sndx-backend
+  tag: latest
+  pullPolicy: Always
+
+service:
+  port: 4000
+
+env:
+  PGHOST: host.docker.internal
+  PGPORT: "5432"
+  PGUSER: postgres
+  PGPASSWORD: postgres
+  PGDATABASE: fhv
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+readinessProbe:
+  path: /health
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+livenessProbe:
+  path: /health
+  initialDelaySeconds: 15
+  periodSeconds: 20
