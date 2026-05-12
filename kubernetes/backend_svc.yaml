@@ -4,6 +4,10 @@ kind: Service
 metadata:
   name: backend
   namespace: nycad-app
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "4000"
+    prometheus.io/path: "/metrics"
 spec:
   selector:
     app: backend
